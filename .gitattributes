@@ -1,0 +1,5 @@
+# Windows で clone / commit しても、Linux（GitHub Actions・harness のサンドボックス）で動くように改行を固定する
+* text=auto
+mvnw text eol=lf
+*.sh text eol=lf
+*.cmd text eol=crlf

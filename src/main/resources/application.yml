@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: lending
+  datasource:
+    # テストでは Spring コンテキストが複数作られるため、DB を共有して schema.sql が再実行されないよう名前を一意にする
+    url: jdbc:h2:mem:lending-${random.uuid};MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+  sql:
+    init:
+      mode: embedded
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
