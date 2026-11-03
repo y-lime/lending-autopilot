@@ -22,6 +22,10 @@ public class EquipmentService {
         return equipmentMapper.findAll();
     }
 
+    public List<Equipment> findByCategory(String category) {
+        return equipmentMapper.findByCategory(category);
+    }
+
     public Equipment get(long id) {
         return equipmentMapper.findById(id)
                 .orElseThrow(() -> new NotFoundException("備品が見つかりません: id=" + id));
