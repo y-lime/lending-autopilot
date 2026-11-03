@@ -33,6 +33,22 @@ class EquipmentApiTest {
     }
 
     @Test
+    void カテゴリで絞り込める() throws Exception {
+        mockMvc.perform(get("/api/equipments").param("category", "PC"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].name").value("ノートPC A"))
+                .andExpect(jsonPath("$[1].name").value("ノートPC B"));
+    }
+
+    @Test
+    void 存在しないカテゴリを指定すると空配列が返る() throws Exception {
+        mockMvc.perform(get("/api/equipments").param("category", "UNKNOWN"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(0));
+    }
+
+    @Test
     void 存在しない備品は404() throws Exception {
         mockMvc.perform(get("/api/equipments/999"))
                 .andExpect(status().isNotFound())

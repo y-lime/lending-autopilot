@@ -17,6 +17,9 @@ public interface EquipmentMapper {
     @Select("SELECT id, name, category, status FROM equipment ORDER BY id")
     List<Equipment> findAll();
 
+    @Select("SELECT id, name, category, status FROM equipment WHERE category = #{category} ORDER BY id")
+    List<Equipment> findByCategory(@Param("category") String category);
+
     @Select("SELECT id, name, category, status FROM equipment WHERE id = #{id}")
     Optional<Equipment> findById(@Param("id") long id);
 

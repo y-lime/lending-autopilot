@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.lending.domain.Equipment;
@@ -21,7 +22,10 @@ public class EquipmentController {
     }
 
     @GetMapping
-    public List<Equipment> list() {
+    public List<Equipment> list(@RequestParam(name = "category", required = false) String category) {
+        if (category != null) {
+            return equipmentService.findByCategory(category);
+        }
         return equipmentService.findAll();
     }
 
